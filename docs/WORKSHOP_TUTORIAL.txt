@@ -3,7 +3,7 @@
 订阅并应用壁纸后，时间、日期、音乐与动效可直接使用。CPU、GPU、内存、网络和温度是可选硬件监控功能。
 
 [h2]1. 下载与运行[/h2]
-从[url=https://github.com/Moral-eddy/wallpaper-design/releases/tag/v0.1.2]GitHub v0.1.2发布页[/url]下载 Mornye-Telemetry-v0.1.2-win64.zip，先解压，再双击 Mornye-Telemetry.exe，普通权限运行。不需要安装Python。
+从[url=https://github.com/ai-girls-institute/wallpaper-design/releases/tag/v0.1.2]GitHub v0.1.2发布页[/url]下载 Mornye-Telemetry-v0.1.2-win64.zip，先解压，再双击 Mornye-Telemetry.exe，普通权限运行。不需要安装Python。
 
 [h2]2. 配置壁纸目录[/h2]
 程序会自动查找作品3817553402。未找到时，在Wallpaper Engine“已安装”页右键本作品→“在资源管理器中打开”，使用EXE的“选择目录”指定包含project.json和index.html的实际订阅文件夹。
@@ -23,4 +23,4 @@ HWiNFO用户仍需开启持续CSV日志，再在EXE里选择日志和实际CPU P
 GPU目前使用NVIDIA接口，缺失字段不代表整个连接失败。CPU温度需要支持的Alienware接口或持续HWiNFO日志。音乐使用Wallpaper Engine原生音频，不需要采集器。
 Steam更新若清理连接配置，请再次配置并重载壁纸。
 
-[url=https://github.com/Moral-eddy/wallpaper-design/blob/main/docs/INSTALL.md]完整安装指南[/url] · [url=https://github.com/Moral-eddy/wallpaper-design]项目源码[/url]
+[url=https://github.com/ai-girls-institute/wallpaper-design/blob/main/docs/INSTALL.md]完整安装指南[/url] · [url=https://github.com/ai-girls-institute/wallpaper-design]项目源码[/url]

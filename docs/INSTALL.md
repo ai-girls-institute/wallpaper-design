@@ -10,7 +10,7 @@ GitHub 完整包提供 v0.1.3 鼠标视差；创意工坊仍以实际下载内�
 
 1. [订阅作品](https://steamcommunity.com/sharedfiles/filedetails/?id=3817553402)，等待下载完成，在 Wallpaper Engine 的“已安装”页面应用。
 2. 音乐使用 Wallpaper Engine 原生音频。请开启音频录制与壁纸属性中的音频响应；它不依赖采集器。
-3. 硬件监控为可选功能。下载 [Mornye-Telemetry-v0.1.2-win64.zip](https://github.com/Moral-eddy/wallpaper-design/releases/download/v0.1.3/Mornye-Telemetry-v0.1.2-win64.zip)，先解压，再双击 `Mornye-Telemetry.exe`，普通权限运行，无需 Python。
+3. 硬件监控为可选功能。下载 [Mornye-Telemetry-v0.1.2-win64.zip](https://github.com/ai-girls-institute/wallpaper-design/releases/download/v0.1.3/Mornye-Telemetry-v0.1.2-win64.zip)，先解压，再双击 `Mornye-Telemetry.exe`，普通权限运行，无需 Python。
 4. 程序自动查找作品3817553402。若未找到，在 Wallpaper Engine 中右键作品 →“在资源管理器中打开”，通过“选择目录”指定包含 `project.json`、`index.html` 的实际订阅下载文件夹。
 5. 点击“配置并启动”。切换到另一张壁纸再切回来，重新加载连接配置。
 6. 点击“打开来源设置”选择使用中的网卡。页面的选择会自动保存，没有“下一步”。

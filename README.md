@@ -4,7 +4,7 @@
 
 让莫宁陪你坐在星海之下。两侧悬浮面板显示电脑状态，声痕随音乐起伏；鼠标移动时画面与远近悬浮窗柔和错位，移入窗体后停稳、提亮。
 
-[**创意工坊订阅**](https://steamcommunity.com/sharedfiles/filedetails/?id=3817553402) · [**下载采集器 EXE（Windows 64 位）**](https://github.com/Moral-eddy/wallpaper-design/releases/download/v0.1.3/Mornye-Telemetry-v0.1.2-win64.zip) · [完整发行包](https://github.com/Moral-eddy/wallpaper-design/releases/download/v0.1.3/Mornye-Observatory-v0.1.3.zip) · [安装指南](docs/INSTALL.md)
+[**创意工坊订阅**](https://steamcommunity.com/sharedfiles/filedetails/?id=3817553402) · [**下载采集器 EXE（Windows 64 位）**](https://github.com/ai-girls-institute/wallpaper-design/releases/download/v0.1.3/Mornye-Telemetry-v0.1.2-win64.zip) · [完整发行包](https://github.com/ai-girls-institute/wallpaper-design/releases/download/v0.1.3/Mornye-Observatory-v0.1.3.zip) · [安装指南](docs/INSTALL.md)
 
 ![莫宁星海观测室：声痕、音乐响应、浮动与悬停演示](docs/media/observatory-demo-v0.1.1.gif)
 
