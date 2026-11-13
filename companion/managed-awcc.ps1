@@ -6,6 +6,16 @@
 # Production telemetry only. No tests, control calls, or overclocking methods.
 # Keep this file UTF-8 with BOM for Windows PowerShell 5.1.
 $ErrorActionPreference = 'Stop'
+function Assert-AwccOutputPaths {
+    foreach ($publicationPath in @($OutputPath,($OutputPath+'.tmp'),($OutputPath+'.last-publish-error.json'))) {
+        $checkPath=[IO.Path]::GetFullPath($publicationPath)
+        while ($checkPath) {
+            if ((Test-Path -LiteralPath $checkPath) -and ((Get-Item -LiteralPath $checkPath -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Alienware export path is redirected; publication refused.' }
+            $checkPath=Split-Path -Parent $checkPath
+        }
+    }
+}
+Assert-AwccOutputPaths
 $awccMutex = New-Object System.Threading.Mutex($false, 'Local\MornyeWallpaperAlienwareSensors')
 $awccOwnsMutex = $false
 try {
@@ -30,6 +40,9 @@ try {
     $awccCollectorRevision = 'firmware-descriptors-01'
 
     function Publish-AwccState($State) {
+        # Elevated writes stay on the explicitly installed real filesystem path.
+        # Refuse redirected output, including an existing file or its ancestors.
+        Assert-AwccOutputPaths
         $State['schemaVersion'] = 1
         $State['collectorRevision'] = $awccCollectorRevision
         $State['sessionId'] = $awccBootId
@@ -62,6 +75,7 @@ try {
             message = $Failure.Exception.Message
         }
         try {
+            Assert-AwccOutputPaths
             [IO.File]::WriteAllText(($OutputPath + '.last-publish-error.json'), ($awccPublicationError | ConvertTo-Json -Compress), $awccUTF8)
         } catch { Write-Warning 'Alienware export and publication error record could not be written.' }
     }

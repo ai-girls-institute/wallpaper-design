@@ -1,5 +1,15 @@
 # 版本记录
 
+## v0.1.4-beta.1 — 2026-11-13 (Beta)
+
+- Fix stale HWiNFO temperature replay when the newest record is invalid or incomplete.
+- Keep stop/restart working when runtime-state persistence is temporarily unavailable.
+- Validate and save complete configuration requests before changing the active selection; preserve the prior selection on failure.
+- Report saved login-startup state from the same file used by installation.
+- Include login startup and tray operation from the previously local-only collector candidates for beta testing.
+- Wallpaper composition, audio and parallax remain based on v0.1.3. This beta does not claim to resolve long-term CEF memory growth.
+- Isolated source and EXE checks passed; real login/reboot and cross-device behavior still need user trials.
+
 ## v0.1.3 — 2026-10-14
 
 - 新增轻量鼠标视差：场景整图和远近悬浮窗按不同幅度移动，沿用当前布局、透视、浮动及悬停。

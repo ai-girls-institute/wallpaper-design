@@ -140,6 +140,8 @@ class Handler(BaseHTTPRequestHandler):
             self.json_response(collector.configure(value))
         except (ValueError, UnicodeError) as exc:
             self.json_response({'error': str(exc)}, 400)
+        except OSError:
+            self.json_response({'error': '配置文件暂时无法写入，原选择已保留，请稍后重试'}, 503)
 
 
 try:

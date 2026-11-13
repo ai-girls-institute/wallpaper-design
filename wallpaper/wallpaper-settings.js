@@ -7,7 +7,7 @@
     quiet: {hardwarePollMs:1000,audioPollMs:100,renderFps:20}
   };
   const state = window.MORNYE_SETTINGS = {
-    version:"0.1.3",floatEnabled:true,floatStrength:1.5,hoverEnabled:true,
+    version:"0.1.4-beta.1",floatEnabled:true,floatStrength:1.5,hoverEnabled:true,
     paneBrightness:1,paneOpacity:1,audioEnabled:true,audioGain:1,
     parallaxEnabled:true,parallaxStrength:1,parallaxResponseMs:240,parallaxReturn:true,
     refreshMode:"fast",fitMode:"contain",generalFps:60,paused:false,

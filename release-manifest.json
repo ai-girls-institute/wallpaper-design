@@ -1,11 +1,11 @@
 {
-  "version": "0.1.3",
+  "version": "0.1.4-beta.1",
   "sceneSize": [
     3440,
     1440
   ],
   "companion": "collector/Mornye-Telemetry.exe",
-  "companionVersion": "0.1.2",
+  "companionVersion": "0.1.4-beta.1",
   "runtimeDataDirectory": "selected wallpaper/telemetry-runtime",
   "nativeAudio": true,
   "userProperties": 28,
@@ -34,34 +34,34 @@
     }
   },
   "waveformGridSteps": 192,
-  "userTrialFeedback": "用户确认本机已重载，视差效果正常；不扩充为其他设备或长期内存验收",
+  "userTrialFeedback": "Beta: isolated source and EXE checks passed; real login/reboot and cross-device behavior remain unverified",
   "longTermMemoryStatus": "Growth unresolved; no claim of leak fix",
   "workshopDistribution": "Separate author upload required; GitHub publication does not update Workshop",
   "files": [
     {
       "path": ".gitattributes",
-      "bytes": 189,
-      "sha256": "4fedba67f2754ee010fed11979c19b80082a18f20c180d00eabf2cb140b7b819"
+      "bytes": 178,
+      "sha256": "7cf95f6747e3092f1700c27a98b0e2ec70d27a93d47e7d59343c30cc673017b8"
     },
     {
       "path": ".gitignore",
-      "bytes": 568,
-      "sha256": "d31cabec3f0526ed0ce18f89108efc8125fd86ec562237c91d1910920759853a"
+      "bytes": 540,
+      "sha256": "5973fe998bb79f137a3306e60e3ef0aa7f2733211e83a165cde2df3466e63a03"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 3679,
-      "sha256": "6bfb7f4fd1cd23f07c5201573bd2c59a344714ee1672d68e766e7072c58a868b"
+      "bytes": 4456,
+      "sha256": "470d84becfeda9bc1557c1231d5672c823e40e1eda0e4193032f33882211a1f4"
     },
     {
       "path": "README.md",
-      "bytes": 3754,
-      "sha256": "b4e06e3dd823ea75d88d13aff1e4253aac3ae0790c107566abd0bd0e3c4242ef"
+      "bytes": 3934,
+      "sha256": "9f6d5417ed50a1fbbd1c94e30177061977db38af41046d4793f42c2f28b88715"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "bytes": 1044,
-      "sha256": "31b1e2e437bf59d414bdb2c535aae367222b8f8e543bb746a5921f6e0ee8d01a"
+      "bytes": 66,
+      "sha256": "ef9fdb1dc354f35df6d783472e8dfec4feca94ce2c1440249ca499adef844733"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -70,33 +70,38 @@
     },
     {
       "path": "companion/README.md",
-      "bytes": 1403,
-      "sha256": "d7eecdaf4c8dce23f8a92e61b24ee4c953300d70a2fe83ceda577dadeb110aed"
+      "bytes": 2229,
+      "sha256": "7bfc1bf07a8f15a614142f0e4094db68b116a653f49ade3ddab2ec6a08e5aacb"
     },
     {
       "path": "companion/Tcl-license.terms",
-      "bytes": 2295,
-      "sha256": "41613eabfc08921a7da9c4bfd7f3ce5d5406f55214b253d89f392ed86eebeb8f"
+      "bytes": 2255,
+      "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16"
     },
     {
       "path": "companion/build-requirements.txt",
-      "bytes": 168,
-      "sha256": "75b5b53c7259f0426556cdc02a01135f481742d230ac659073d0ad6d6e5debda"
+      "bytes": 160,
+      "sha256": "9dde3b746b56f33fef123e7890fccd6a9e13fada8b5bc0817cb8ee8201f61a33"
     },
     {
       "path": "companion/build.ps1",
-      "bytes": 827,
-      "sha256": "fb98b7847685483ee6cf7e782c78017c169db30bf64dc46bf8c3eaadb7941ee9"
+      "bytes": 867,
+      "sha256": "694ca23562f503ff0d4638a47a171e284e828ffd459b3d6132ffa767a17ad9fc"
+    },
+    {
+      "path": "companion/checks/telemetry_regressions.py",
+      "bytes": 17023,
+      "sha256": "801fcf484e9a65a45282702478118ad7c1d286ad3a3564ae2b8140d0f757df87"
     },
     {
       "path": "companion/collector.py",
-      "bytes": 26109,
-      "sha256": "36cfa5bcbc90570f2457bd73c58e64125b39db909afa059c14c0797ef90175ec"
+      "bytes": 27063,
+      "sha256": "24e21c120725467a2a0da6afdd37f4055a39ce76ef6894def42c5aeeb6ca4869"
     },
     {
       "path": "companion/companion_core.py",
-      "bytes": 12547,
-      "sha256": "e810412571becf3a04c61ecf82c7a19f32b0d6e7ad7ff4ad5dc56bea8bd0f4e1"
+      "bytes": 12857,
+      "sha256": "3011ed88493a6c6d7710e778ca46f1b28f0bec7f17b3a13fbba98763f7d2bf7c"
     },
     {
       "path": "companion/configure.html",
@@ -110,13 +115,13 @@
     },
     {
       "path": "companion/launcher.py",
-      "bytes": 10285,
-      "sha256": "4a52291849d6d1c0cfe957fad177caed3016c0608d258a020ed763cb49077d93"
+      "bytes": 18349,
+      "sha256": "7c80c13a2d758b3a1b1e5c0629187d60b098d8967cebfab042b347f76c97913e"
     },
     {
       "path": "companion/managed-awcc.ps1",
-      "bytes": 12459,
-      "sha256": "539a4754e6764d8f82e7cf9d0d952457efdf9ca2776d4453d48bee61eee70f7b"
+      "bytes": 13052,
+      "sha256": "d0ac0363bdf04cccc9acf56ad81263574345e9d3f78bbb546dfbe3882bfdc657"
     },
     {
       "path": "companion/managed_sensors.py",
@@ -124,14 +129,49 @@
       "sha256": "608fb286c9b7d6958bc66bfd582e6a6eb46ad84dada7eb71bfa5d1ca2382f016"
     },
     {
+      "path": "companion/persistent-install.ps1",
+      "bytes": 6772,
+      "sha256": "819006e5dd1e615244dbaa3fbae71bdf42a3082dc29603348332bbc49764fc3a"
+    },
+    {
+      "path": "companion/persistent-runner.ps1",
+      "bytes": 783,
+      "sha256": "8fd6764e6d431f7c0682958b0703e82b6fbe85c82b6e02ca37ab6fe76c84f8be"
+    },
+    {
+      "path": "companion/persistent_integrity.py",
+      "bytes": 86,
+      "sha256": "e147c28210e7e51517f55024c6f1e8e6421342b7704706b4afa0bfaa09836bf0"
+    },
+    {
+      "path": "companion/persistent_sensors.py",
+      "bytes": 4505,
+      "sha256": "5cb4ab19c7acb2f737d134af0fa63cba95f7bf60198d4b8aff5bd98b4c758932"
+    },
+    {
       "path": "companion/portable_server.py",
-      "bytes": 6797,
-      "sha256": "eef2e8fe660c92645471337490b274957fb1524dcbe64cd8971f438810a5136d"
+      "bytes": 6861,
+      "sha256": "a730213cd42aecd0c22509f0fafb7a5e5241ea94e29c5c90ba2e1dc609695abb"
+    },
+    {
+      "path": "companion/prepare-resources.py",
+      "bytes": 1076,
+      "sha256": "6cb3550763797f86937cab6ee0e44b42a9c4b0de03b71a8f4497d02235785c08"
+    },
+    {
+      "path": "companion/startup-task.ps1",
+      "bytes": 3325,
+      "sha256": "61ac2205c850a481355023dcfbdc14f607f57a080e4c52e6cda403b292cd7f8e"
+    },
+    {
+      "path": "companion/startup.py",
+      "bytes": 5014,
+      "sha256": "23d7535c8f5707b10460d122e58a45aa58a88afb77d1e804088544b2ea312ad5"
     },
     {
       "path": "companion/tests/test-source-page.cjs",
-      "bytes": 2982,
-      "sha256": "e53981d72a24e1f6960f3d1e838152a4d0a13b0704d8f3131b938d5dc943de81"
+      "bytes": 2932,
+      "sha256": "1508247f517bf83d2c3ebfb8db478d3ea51bb7d2ca2800eb00f7ed02d1ae76f3"
     },
     {
       "path": "companion/tests/test_companion.py",
@@ -139,19 +179,39 @@
       "sha256": "a86e405e88383a4def51b8ee7aa23ccbb32b761a781e80daa02b8a71d6a8e2fa"
     },
     {
+      "path": "companion/tests/test_lifecycle.py",
+      "bytes": 3872,
+      "sha256": "4bf7f8a58805750074ea0c8c1dc8dabdb4a75503302c9ea46d919b2567fe62d1"
+    },
+    {
+      "path": "companion/tests/test_startup.py",
+      "bytes": 5767,
+      "sha256": "1bbff6cccf944594977fd07db1fb1835038a66eef89e729d53bd02fa38902615"
+    },
+    {
+      "path": "companion/tests/test_tray_recovery.py",
+      "bytes": 4176,
+      "sha256": "ae9cb0ecd0966920affb31e2108b49364504380214732dc5c62d3893f4255ee7"
+    },
+    {
+      "path": "companion/windows_tray.py",
+      "bytes": 12008,
+      "sha256": "6a6713507d6258e5a5315c9324b6ad647d320b5a04e9da196e707bd75e618a6c"
+    },
+    {
       "path": "companion/worker_integrity.py",
       "bytes": 92,
-      "sha256": "0bf970d555a56609e6b516cc6f93e54b74264385bcfec52010c039d9a0025306"
+      "sha256": "40da9cad9142e83c927f529fb3cd6c16cbfcdbcb364bd3ec7ddd247fb9336aab"
     },
     {
       "path": "docs/INSTALL.md",
-      "bytes": 5547,
-      "sha256": "f36005d717871df51d93cd9b9413f007032d67bed85f0a4be556c73988bc28da"
+      "bytes": 6665,
+      "sha256": "1f9f5c9c5cfa160a64e6378d8d657964d9085d14d359eacac62241fd285b5121"
     },
     {
       "path": "docs/WORKSHOP_TUTORIAL.txt",
-      "bytes": 2369,
-      "sha256": "3fd302a835a5c016ad1af0220374a06da6b8f3837ac524a5deaddc689b71f9cc"
+      "bytes": 2367,
+      "sha256": "92e11e74aefea8801b4075e7d6b4bda54b0c5cfe0a6004b3f174e9e3571832ce"
     },
     {
       "path": "docs/media/observatory-demo-v0.1.1.gif",
@@ -165,8 +225,8 @@
     },
     {
       "path": "setup-telemetry.ps1",
-      "bytes": 1752,
-      "sha256": "30fb7a81cbbf9e14af961910e279778f891004a11bb1d9d16980bde2c8afd635"
+      "bytes": 1726,
+      "sha256": "188d7e565d2acf6ad3ab4104e7da336fcee6e61dce4b537b7c49ae1843f62ceb"
     },
     {
       "path": "telemetry/audio-loopback.py",
@@ -175,13 +235,13 @@
     },
     {
       "path": "telemetry/awcc-sensors.ps1",
-      "bytes": 11159,
-      "sha256": "c710e2ba92f423f7beb943bba051c17c58db8e3d97d424f40719dbb3768578df"
+      "bytes": 10989,
+      "sha256": "3a754a7ce9a3a7a9c18b061e1a531aa9ff55d9ac5a83b82d432582de334f86ea"
     },
     {
       "path": "telemetry/collector.py",
-      "bytes": 26039,
-      "sha256": "6c3b3bb95cb0f387081410e94eeb9b17c04bd818f6b4f45b6ce106e0723ae62c"
+      "bytes": 26993,
+      "sha256": "b5d1e14c9df3691199cd5b5669001436d7ac92b2c25581ae1a1a008f95b79412"
     },
     {
       "path": "telemetry/configure.html",
@@ -190,13 +250,13 @@
     },
     {
       "path": "telemetry/install-telemetry-task.ps1",
-      "bytes": 6528,
-      "sha256": "018df438a5d06805724ef521b946d0248dbeaadc71cc48d3ce026f227b615102"
+      "bytes": 6421,
+      "sha256": "4102aeb2df83d75f04e2690e08ba85ba2c543b3a7488d49328e78d42362f8220"
     },
     {
       "path": "telemetry/requirements.txt",
-      "bytes": 61,
-      "sha256": "4d9940ffbd5be243e59e76e443737c1f7304373b2757436b2733552161357ad5"
+      "bytes": 57,
+      "sha256": "01999f0d60700128f6ec69dd2adb86cbce6d3a4c2e8f95207b7757fe586895dc"
     },
     {
       "path": "telemetry/runtime-host.py",
@@ -205,13 +265,13 @@
     },
     {
       "path": "telemetry/serve.py",
-      "bytes": 7589,
-      "sha256": "77d80c6955e1abd9787dd46ac4419c141f718b7d06075fe3285055327cbf40e9"
+      "bytes": 7733,
+      "sha256": "34227017e365ed2a130f41b2248cf0307975ce2c25db2cee7ad910567d90b459"
     },
     {
       "path": "telemetry/start-live.ps1",
-      "bytes": 418,
-      "sha256": "11c574b08150e1b1a9dabcdc7fe05bfa69dc87a19be70533c1e526fbaff8ded4"
+      "bytes": 410,
+      "sha256": "0dd5fb5eb5aea31ecc395a6d250f418c2f42a286a418624453698930084212b8"
     },
     {
       "path": "telemetry/startup.py",
@@ -260,18 +320,18 @@
     },
     {
       "path": "wallpaper/fonts/oxanium-OFL.txt",
-      "bytes": 4477,
-      "sha256": "520a09e6882633c90889fa75faf55ca93e6e62a5f98c7ffca3db832c1b3d4173"
+      "bytes": 4384,
+      "sha256": "fe17c0f2581d71b4e1ea7e636e7f4877c29223e11bb1dd1a871e8c3f2a86336b"
     },
     {
       "path": "wallpaper/fonts/rajdhani-OFL.txt",
-      "bytes": 4466,
-      "sha256": "bb36ea0b5e02431f0372edde87b029ceb071806f5296c4ffb38756850a54e2ed"
+      "bytes": 4373,
+      "sha256": "f62ef357d3a1c3d27edd35a6e1ba350e8a8d13499797964eeadefbf0b3b15d1f"
     },
     {
       "path": "wallpaper/index.html",
-      "bytes": 6905,
-      "sha256": "5a0bae20305753719a2a952f1a92b391753ab8257a0d8d5d01e4e675b564e0a2"
+      "bytes": 6912,
+      "sha256": "89737fd83cebc7ee8d677a66577f523217dbd50150239eea66ceb47262fd6c68"
     },
     {
       "path": "wallpaper/live-data.css",
@@ -300,8 +360,8 @@
     },
     {
       "path": "wallpaper/project.json",
-      "bytes": 6748,
-      "sha256": "ef8352aebed3467c501f066a447eea38967da38758d55f88b5e800fa4ac783c0"
+      "bytes": 6755,
+      "sha256": "0c98b1650e64c42f1cc21b8b1eb33c9bb3d834e7635b2e811cdffdda653b5ace"
     },
     {
       "path": "wallpaper/runtime.css",
@@ -350,8 +410,8 @@
     },
     {
       "path": "wallpaper/wallpaper-settings.js",
-      "bytes": 5396,
-      "sha256": "4ba6aa37d275334546c8a46dbbad562e12babd7d715688e6f196cf3ef4cfc6c6"
+      "bytes": 5403,
+      "sha256": "695c51ed996009e94a4d677326b45e6526154911817f6d5b861944c3d6de61f2"
     },
     {
       "path": "wallpaper/wallpaper-status.js",
@@ -365,7 +425,10 @@
     }
   ],
   "companionExe": {
-    "bytes": 12765031,
-    "sha256": "4d013d55f5a67d31a2f23880737f7476208bbafeaaadcb1e4e04890062ef16fe"
-  }
+    "path": "collector/Mornye-Telemetry.exe",
+    "bytes": 12920045,
+    "sha256": "bee0f39e8f474ae16359af55c4c4ccd9be01b0956e75e06e83159b4f7ef4d8ad"
+  },
+  "prerelease": true,
+  "sourceBase": "4a32c26929fcb8339ea38cdadb8064d429b6aed1"
 }

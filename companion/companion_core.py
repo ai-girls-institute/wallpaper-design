@@ -13,7 +13,7 @@ import shutil
 import threading
 import time
 
-APP_VERSION = '0.1.2'
+APP_VERSION = '0.1.4-beta.1'
 WORKSHOP_ID = '3817553402'
 
 def atomic_json(path, value):
@@ -141,9 +141,13 @@ class Runtime:
         return f'http://127.0.0.1:{self.port}/configure.html' if self.server else None
 
     def state(self, status):
-        atomic_json(self.data_root / 'runtime-state.json', {'version':APP_VERSION, 'status':status,
-                    'processId':os.getpid(), 'port':self.port, 'url':self.url,
-                    'updatedAt':datetime.now(timezone.utc).isoformat()})
+        try:
+            atomic_json(self.data_root / 'runtime-state.json', {'version':APP_VERSION, 'status':status,
+                        'processId':os.getpid(), 'port':self.port, 'url':self.url,
+                        'updatedAt':datetime.now(timezone.utc).isoformat()})
+        except OSError as error:
+            # Diagnostic persistence must not control the collector lifecycle.
+            self.logger.warning('Runtime state write unavailable: %s', error)
 
     def start(self):
         if self.server:
@@ -266,11 +270,15 @@ class Runtime:
             self.thread.join(timeout=3)
             self.server.server_close()
             self.collector.close()
-            self.state('stopped')
-            self.server = self.collector = self.thread = None
+            try:
+                self.state('stopped')
+            finally:
+                self.server = self.collector = self.thread = None
             self.logger.info('Collector stopped')
 
     def close(self):
-        self.stop()
-        self.logger.removeHandler(self.log_handler)
-        self.log_handler.close()
+        try:
+            self.stop()
+        finally:
+            self.logger.removeHandler(self.log_handler)
+            self.log_handler.close()

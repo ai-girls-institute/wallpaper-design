@@ -128,8 +128,12 @@ class HWiNFOLog:
         stat = self.path.stat()
         with self.path.open('rb') as handle:
             head = handle.readline(262144)
-            handle.seek(max(0, stat.st_size - 131072))
+            offset = max(0, stat.st_size - 131072)
+            handle.seek(offset)
             tail = handle.read(131072)
+            if offset:
+                # The bounded tail may begin inside a quoted field.
+                tail = tail.partition(b'\n')[2]
         encoding = 'utf-8-sig'
         try:
             header_text = head.decode(encoding)
@@ -162,15 +166,27 @@ class HWiNFOLog:
         if time.time() - stat.st_mtime > 6.0:
             result.update(status='stale', message='HWiNFO 日志已停止更新')
             return result
-        for row in reversed(list(csv.reader(io.StringIO(body), delimiter=delimiter))):
-            if column >= len(row) or not row or not re.search(r'\d', row[0]): continue
-            try: value = float(row[column].strip().replace(',', '.'))
-            except ValueError: continue
-            # Reject non-temperature columns/invalid device sentinels in production.
-            if math.isfinite(value) and -30 <= value <= 150:
-                result.update(status='online', valueC=value, message='CPU Package 温度已接入')
-                return result
         result['message'] = '等待下一条有效 CPU Package 温度记录'
+        # Never replay an earlier row when the newest reading is unavailable.
+        # A writer may be between writes, including halfway through a number.
+        if not body.endswith(('\n', '\r')):
+            return result
+        try:
+            rows = [row for row in csv.reader(io.StringIO(body), delimiter=delimiter, strict=True)
+                    if any(cell.strip() for cell in row)]
+        except csv.Error:
+            return result
+        if not rows:
+            return result
+        row = rows[-1]
+        if len(row) != len(header) or not re.search(r'\d', row[0]):
+            return result
+        try:
+            value = float(row[column].strip().replace(',', '.'))
+        except ValueError:
+            return result
+        if math.isfinite(value) and -30 <= value <= 150:
+            result.update(status='online', valueC=value, message='CPU Package 温度已接入')
         return result
 
 class AlienwareExport:
@@ -405,35 +421,51 @@ class Collector:
 
     def configure(self, options):
         with self.lock:
+            # Validate the complete request against one snapshot before changing
+            # live state, histories or the saved configuration.
             adapter = options.get('adapter')
+            next_adapter = self.selected_adapter
+            name = self.sensor.selected
+            source = self.temperature_source
+            sensor_key = self.awcc_temperature_sensor
             if adapter is not None:
                 available = psutil.net_io_counters(pernic=True)
                 if not isinstance(adapter, str) or adapter not in available: raise ValueError('请选择当前存在的网卡')
-                if adapter != self.selected_adapter:
-                    self.selected_adapter = adapter
-                    self.manual_adapter = True
-                    self.network_prev = self.network_base = None
-                    self.network_session = str(uuid.uuid4())
-                    self.network_started = None
-                    for row in self.history:
-                        row['networkDownloadBytesPerSecond'] = row['networkUploadBytesPerSecond'] = None
-                    if self.snapshot:
-                        self.snapshot['network'] = {'status': 'warming', 'adapter': adapter, 'source': 'Windows / psutil', 'availableAdapters': self.snapshot.get('network', {}).get('availableAdapters', [])}
-                        self.snapshot['history'] = list(self.history)
+                next_adapter = adapter
             if 'temperatureSensor' in options:
                 name = options['temperatureSensor']
                 choices = self.snapshot.get('cpu', {}).get('temperatureSources', {}).get('hwinfo_csv', {}).get('availableSensors', []) if self.snapshot else []
                 if not isinstance(name, str) or name not in choices: raise ValueError('请选择日志中的 CPU Package 温度列')
-                self.sensor.selected = name
             if 'temperatureSource' in options:
                 source = options['temperatureSource']
                 if not isinstance(source, str) or source not in {'hwinfo_csv', 'alienware_wmi'}: raise ValueError('温度来源无效')
-                self.temperature_source = source
             if 'awccTemperatureSensor' in options:
-                key = options['awccTemperatureSensor']
+                sensor_key = options['awccTemperatureSensor']
                 choices = [item['key'] for item in self.snapshot.get('alienware', {}).get('sensors', [])] if self.snapshot else []
-                if not isinstance(key, str) or key not in choices: raise ValueError('请选择当前 Alienware 温度传感器')
-                self.awcc_temperature_sensor = key
+                if not isinstance(sensor_key, str) or sensor_key not in choices: raise ValueError('请选择当前 Alienware 温度传感器')
+            # Persist the proposed selection first. A failed replace leaves both
+            # the previous saved file and the active selection intact.
+            if self.settings_path:
+                saved = {'adapter': next_adapter, 'temperatureSensor': name,
+                         'temperatureSource': source, 'awccTemperatureSensor': sensor_key,
+                         'savedAt': iso_now(), 'sensorLogPath': str(self.sensor.path.resolve())}
+                temporary = self.settings_path.with_suffix('.tmp')
+                temporary.write_text(json.dumps(saved, ensure_ascii=False, indent=2), encoding='utf-8')
+                temporary.replace(self.settings_path)
+            if next_adapter != self.selected_adapter:
+                self.selected_adapter = next_adapter
+                self.manual_adapter = True
+                self.network_prev = self.network_base = None
+                self.network_session = str(uuid.uuid4())
+                self.network_started = None
+                for row in self.history:
+                    row['networkDownloadBytesPerSecond'] = row['networkUploadBytesPerSecond'] = None
+                if self.snapshot:
+                    self.snapshot['network'] = {'status': 'warming', 'adapter': next_adapter, 'source': 'Windows / psutil', 'availableAdapters': self.snapshot.get('network', {}).get('availableAdapters', [])}
+                    self.snapshot['history'] = list(self.history)
+            self.sensor.selected = name
+            self.temperature_source = source
+            self.awcc_temperature_sensor = sensor_key
             if any(key in options for key in ('temperatureSensor', 'temperatureSource', 'awccTemperatureSensor')):
                 for row in self.history:
                     row['cpuPackageTemperature'] = row['cpuTemperature'] = None
@@ -443,12 +475,5 @@ class Collector:
                     self.snapshot['cpu']['packageTemperatureC'] = None
                     self.snapshot['cpu']['temperatureC'] = None
                     self.snapshot['cpu']['temperatureProvider'].update(status='warming', valueC=None, message='正在读取所选 CPU 温度来源')
-            if self.settings_path:
-                saved = {'adapter': self.selected_adapter, 'temperatureSensor': self.sensor.selected,
-                         'temperatureSource': self.temperature_source, 'awccTemperatureSensor': self.awcc_temperature_sensor,
-                         'savedAt': iso_now(), 'sensorLogPath': str(self.sensor.path.resolve())}
-                temporary = self.settings_path.with_suffix('.tmp')
-                temporary.write_text(json.dumps(saved, ensure_ascii=False, indent=2), encoding='utf-8')
-                temporary.replace(self.settings_path)
             return {'status': 'configured', 'adapter': self.selected_adapter, 'temperatureSensor': self.sensor.selected,
                     'temperatureSource': self.temperature_source, 'awccTemperatureSensor': self.awcc_temperature_sensor}

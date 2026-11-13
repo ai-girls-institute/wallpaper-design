@@ -97,8 +97,8 @@ def create_server(data_root, port, read_key, page_path, sensor_log):
             elif path == '/api/v1/audio':
                 self.json_response(collector.read_audio())
             elif path == '/api/v1/info':
-                startup_path = ROOT / 'records/collector-startup.json'
-                startup = json.loads(startup_path.read_text(encoding='utf-8')) if startup_path.is_file() else {}
+                from startup import startup_state
+                startup = startup_state(ROOT)
                 self.json_response({'schemaVersion': 1, 'sampleIntervalMs': round(INTERVAL * 1000),
                     'historySeconds': 60, 'sensorLogPath': args.sensor_log.name,
                     'startup': {'installed': bool(startup.get('installed'))},
@@ -129,6 +129,8 @@ def create_server(data_root, port, read_key, page_path, sensor_log):
                 self.json_response(collector.configure(value))
             except (ValueError, UnicodeError) as exc:
                 self.json_response({'error': str(exc)}, 400)
+            except OSError:
+                self.json_response({'error': '配置文件暂时无法写入，原选择已保留，请稍后重试'}, 503)
 
 
     try:

@@ -1,16 +1,16 @@
 # 莫宁 · 星海观测室
 
-**Wallpaper Engine 动态壁纸 · v0.1.3 · 3440×1440**
+**Wallpaper Engine 动态壁纸 · v0.1.4-beta.1 (Beta) · 3440×1440**
 
 让莫宁陪你坐在星海之下。两侧悬浮面板显示电脑状态，声痕随音乐起伏；鼠标移动时画面与远近悬浮窗柔和错位，移入窗体后停稳、提亮。
 
-[**创意工坊订阅**](https://steamcommunity.com/sharedfiles/filedetails/?id=3817553402) · [**下载采集器 EXE（Windows 64 位）**](https://github.com/ai-girls-institute/wallpaper-design/releases/download/v0.1.3/Mornye-Telemetry-v0.1.2-win64.zip) · [完整发行包](https://github.com/ai-girls-institute/wallpaper-design/releases/download/v0.1.3/Mornye-Observatory-v0.1.3.zip) · [安装指南](docs/INSTALL.md)
+[**创意工坊订阅**](https://steamcommunity.com/sharedfiles/filedetails/?id=3817553402) · [**下载采集器 EXE（Windows 64 位）**](https://github.com/ai-girls-institute/wallpaper-design/releases/download/v0.1.4-beta.1/Mornye-Telemetry-v0.1.4-beta.1-win64.zip) · [完整发行包](https://github.com/ai-girls-institute/wallpaper-design/releases/download/v0.1.4-beta.1/Mornye-Observatory-v0.1.4-beta.1.zip) · [安装指南](docs/INSTALL.md)
 
 ![莫宁星海观测室：声痕、音乐响应、浮动与悬停演示](docs/media/observatory-demo-v0.1.1.gif)
 
 *上图为 v0.1.1 的旧版演示：8 秒循环，1032×432 / 15fps，读数与音频均为模拟输入，不展示新增鼠标视差；壁纸交付尺寸为 3440×1440。*
 
-**v0.1.3 新增轻量鼠标视差，并采用 192 步声痕绘制与缓冲复用。** 默认强度 100%、缓动 240ms、移开回正，可在属性中调整。采集器仍为已发行的 v0.1.2。GitHub 完整包已包含新版；创意工坊作品的更新由作者另行上传，现有订阅不会因 GitHub 发布自动升级。
+**v0.1.4-beta.1：Bug fixes。** 本预发布修复采集器温度、停止恢复、配置保存和启动状态问题，并提供登录自动采集与托盘功能试用。画面、音频与视差沿用 v0.1.3；稳定版仍可从 [v0.1.3 Release](https://github.com/ai-girls-institute/wallpaper-design/releases/tag/v0.1.3) 获取。GitHub 发布不会自动更新创意工坊。
 
 ## 可以体验什么
 
@@ -31,7 +31,7 @@
 
 **音乐响应不需要采集器。** 硬件未连接或字段不支持时显示缺失。GPU 当前使用 NVIDIA 驱动接口；CPU 温度需要支持的 Alienware 接口，或持续更新的 HWiNFO CSV。
 
-程序数据保存在壁纸目录的 `telemetry-runtime` 子文件夹。保持 EXE 运行可持续采集，最小化不会退出；本版手动启动，不登记登录任务。Steam 更新若清理配置，需再次配置连接。
+程序数据保存在壁纸目录的 `telemetry-runtime` 子文件夹。最小化或关闭窗口会收进托盘并继续采集，双击托盘可恢复设置；“退出采集器”结束本次运行。可通过按钮启用或取消登录自动采集。Steam 更新若清理配置，需再次配置连接。
 
 也可下载完整包，以其中 `wallpaper/index.html` 手动导入网页壁纸，按[安装指南](docs/INSTALL.md)恢复原生属性。
 
